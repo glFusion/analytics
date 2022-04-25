@@ -52,7 +52,7 @@ class ItemListView
      */
     public function addItem(ItemView $IV) : self
     {
-        $item->list_position = self::$list_position++;
+        $IV->list_position = self::$list_position++;
         $this->items[] = $IV;
         return $this;
     }
