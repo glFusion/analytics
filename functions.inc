@@ -87,7 +87,7 @@ function plugin_upgrade_analytics($dvlp = false)
  * Run scheduled tasks.
  * - Delete old sessions.
  */
-function plugin_runScheduledTask_shop()
+function plugin_runScheduledTask_analytics()
 {
     $ts = time() - (86400 * 14);
     $db = Database::getInstance();
