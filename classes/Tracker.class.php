@@ -313,6 +313,32 @@ class Tracker
 
 
     /**
+     * Track an Ecommerce order asynchronously, such as from IPN or webhook.
+     *
+     * @param   object  $OV     Order View object
+     * @param   array   $trk_info   Tracking info, including uniq_id value
+     * @param   array   $IPN    Array of IPN or Webhook data
+     * @return  object  $this
+     */
+    public function addTransactionViewAsync(OrderView $OV, array$trk_info, array $IPN) : self
+    {
+        return $this;
+    }
+
+
+    /**
+     * Add a transaction view such as "view cart".
+     *
+     * @param   object  $OV     OrderView object
+     * @param   string  $event  Standard event type
+     */
+    public function addTransactionView(OrderView $OV, ?string $event=NULL) : self
+    {
+        return $this;
+    }
+
+
+    /**
      * Get an array of uninstalled Trackers for the admin list.
      *
      * @param   array   $data_arr   Reference to data array
