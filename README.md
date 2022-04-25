@@ -15,11 +15,12 @@ as needed.
 ## Installation
 Installation is accomplished by using the glFusion automated plugin installer.
 
-When the Analytics plugin is first installed, it is only available to members of the Root group. To open the shop publicly, set the `Enable public access` setting to `Yes` in the plugin's global configuration.
-
 ## Configuration
 Visit your site's Command and Control section, select "Analytics", and click the Plus icon
 to install one or more modules. Each module has its own set of configuration values
 that must be set before the module can be used.
 
 Click the Edit icon for the installed module(s) to update the configuration items required.
+
+For trackers that support custom data fields you can use autotags to capture information
+from the current user.
