@@ -84,6 +84,27 @@ function plugin_upgrade_analytics($dvlp = false)
 
 
 /**
+ * Run scheduled tasks.
+ * - Delete old sessions.
+ */
+function plugin_runScheduledTask_shop()
+{
+    $ts = time() - (86400 * 14);
+    $db = Database::getInstance();
+    try {
+        $db->conn->executeUpdate(
+            "DELETE FROM {$_TABLES['ua_sess_info']}
+            WHERE UNIX_TIMESTAMP(last_update) < ?",
+            [$ts],
+            [Database::INTEGER]
+        );
+    } catch (\Exception $e) {
+        Log::write('system', Log::ERROR, __FUNCTION__ . ': ' . $e->getMessage());
+    }
+}
+
+
+/**
  * Returns the URL of the plugin's icon.
  *
  * @return  string      URL of the icon
