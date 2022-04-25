@@ -99,8 +99,7 @@ function plugin_install_analytics()
  */
 function plugin_load_configuration_analytics()
 {
-    return true;
-    //return plugin_initconfig_analytics();
+    return plugin_initconfig_analytics();
 }
 
 

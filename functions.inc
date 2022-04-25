@@ -78,7 +78,8 @@ if (file_exists(__DIR__ . '/config.php')) {
  */
 function plugin_upgrade_analytics($dvlp = false)
 {
-    //return Upgrades\Upgrade::doUpgrade($dvlp);
+    require_once __DIR__ . '/upgrade.inc.php';
+    return analytics_do_upgrade();
 }
 
 
@@ -161,15 +162,25 @@ function plugin_chkVersion_analytics()
 
 /**
  * Execute additional functions when COM_siteHeader() is called.
+ * Adds tracker codes to the header, depending on the url and whether
+ * tracking admin page views is allowed.
  */
 function plugin_getheadercode_analytics()
 {
+    global $_CONF;
+
+
     $retval = '';
-    $Trackers = Analytics\Tracker::getEnabled();
-    foreach ($Trackers as $Tracker) {
-        $Instance = Analytics\Tracker::getInstance($Tracker->getName());
-        $retval .= $Instance->getCode();
-        $Instance->clearCodes();
+    if (
+        Config::get('trk_adm_pages') == 1 ||
+        @strpos(COM_getCurrentURL(), $_CONF['site_admin_url']) !== 0
+    ) {
+        $Trackers = Analytics\Tracker::getEnabled();
+        foreach ($Trackers as $Tracker) {
+            $Instance = Analytics\Tracker::getInstance($Tracker->getName());
+            $retval .= $Instance->getCode();
+            $Instance->clearCodes();
+        }
     }
     return $retval;
 }

@@ -29,3 +29,26 @@ $LANG_UA = array (
 'q_del_item'        => 'Are you sure you want to delete this item?',
 'configuring'       => 'Configuring Tracker',
 );
+
+
+// Localization of the Admin Configuration UI
+$LANG_configsections['analytics'] = array(
+    'label' => 'Analytics',
+    'title' => 'Analytics Configuration',
+);
+
+$LANG_confignames['analytics'] = array(
+    'trk_adm_pages' => 'Track Admin Page Hits?',
+);
+
+$LANG_configsubgroups['analytics'] = array(
+    'sg_main' => 'Main Settings',
+);
+
+$LANG_fs['analytics'] = array(
+    'fs_main' => 'Main Analytics Settings',
+);
+
+$LANG_configSelect['analytics'] = array(
+    0 => array(1 => 'True', 0 => 'False'),
+);
