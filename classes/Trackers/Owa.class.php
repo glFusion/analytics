@@ -64,13 +64,13 @@ class Owa extends \Analytics\Tracker
      * Make the tracker session data.
      * Actually retrieves the data from OWA.
      *
-     * @return  array       Array with the owa_session key set
+     * @return  array       Array with the Owa_cid key set
      */
     protected function makeSessionInfo() : array
     {
         require_once __DIR__ . '/../../vendor/autoload.php';
         $tracker = new \OwaSdk\Tracker\TrackerClient(array());
-        return array('owa_session' => $tracker->getSessionId());
+        return array('Owa_cid' => $tracker->getSessionId());
     }
 
 
@@ -168,10 +168,10 @@ class Owa extends \Analytics\Tracker
     public function addTransactionViewAsync(OrderView $OV, array$trk_info, array $IPN) : self
     {
         $sess_info = $this->getSessionById($trk_info['s_id']);
-        if (!isset($sess_info['owa_session'])) {
+        if (!isset($sess_info['Owa_cid'])) {
             return $this;
         }
-        $owa_sess_id = $sess_info['owa_session'];
+        $owa_sess_id = $sess_info['Owa_cid'];
 
         require_once Config::get('path') . 'vendor/autoload.php';
         $config = array(
