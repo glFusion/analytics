@@ -43,13 +43,24 @@ $analyticsConfigData = array(
         'group' => 'analytics',
     ),
     array(
-        'name' => 'trk_adm_pages',   // Track admin page hits?
+        'name' => 'trk_adm_pages',  // Track admin page hits?
         'default_value' => 0,
         'type' => 'select',
         'subgroup' => 0,
         'fieldset' => 0,
         'selection_array' => 0,
         'sort' => 10,
+        'set' => true,
+        'group' => 'analytics',
+    ),
+    array(
+        'name' => 'parse_autotags', // Parse autotags in custom fields?
+        'default_value' => 1,
+        'type' => 'select',
+        'subgroup' => 0,
+        'fieldset' => 0,
+        'selection_array' => 0,
+        'sort' => 20,
         'set' => true,
         'group' => 'analytics',
     ),

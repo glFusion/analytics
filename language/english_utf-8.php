@@ -37,16 +37,17 @@ $LANG_configsections['analytics'] = array(
     'title' => 'Analytics Configuration',
 );
 
-$LANG_confignames['analytics'] = array(
-    'trk_adm_pages' => 'Track Admin Page Hits?',
-);
-
 $LANG_configsubgroups['analytics'] = array(
     'sg_main' => 'Main Settings',
 );
 
 $LANG_fs['analytics'] = array(
     'fs_main' => 'Main Analytics Settings',
+);
+
+$LANG_confignames['analytics'] = array(
+    'trk_adm_pages' => 'Track Admin Page Hits?',
+    'parse_autotags' => 'Parse Autotags?',
 );
 
 $LANG_configSelect['analytics'] = array(
