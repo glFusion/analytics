@@ -1,0 +1,9 @@
+{# general admin field types #}
+<!-- BEGIN field-text -->
+	<input class="uk-input uk-form-width-large" type="text"
+	<!-- BEGIN attr -->
+	{name}="{value}"
+	<!-- END attr -->
+	>
+<!-- END field-text -->
+{# end admin fields #}

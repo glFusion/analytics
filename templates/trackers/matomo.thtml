@@ -1,0 +1,22 @@
+<!-- begin {templatelocation} -->
+<script type="text/javascript">
+    var _paq = window._paq || [];
+    _paq.push(['enableLinkTracking']);
+    {code_txt}
+    _paq.push(['trackPageView']);
+    (function() {
+        var u="{matomo_url}/";
+        _paq.push(['setTrackerUrl', u+'matomo.php']);
+        _paq.push(['setSiteId', '{matomo_site_id}']);
+<!-- BEGIN customDims -->
+    _paq.push(['setCustomDimension', {custom_id}, '{custom_val}']);
+<!-- END customDims -->
+        var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+        g.type='text/javascript';
+        g.async=true;
+        g.defer=true;
+        g.src=u+'matomo.js';
+        s.parentNode.insertBefore(g,s);
+    })();
+</script>
+<!-- end {templatelocation} -->

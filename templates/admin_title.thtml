@@ -1,0 +1,54 @@
+{# begin {templatelocation} #}
+<div class="uk-grid" uk-grid>
+	<div class="uk-width-3-4">
+{!if icon}
+		<div style="float:left;margin-right:10px;">
+			<img src="{icon}" />
+		</div>
+{!endif}
+		<div style="float:left;">
+{!if title}
+			<h2 style="float:left">{title}</h2>
+{!endif}
+{!if subtitle}
+			<h2 style="float:right">{subtitle}</h2>
+{!endif}
+		</div>
+	</div>
+</div>
+<script>
+var UA_toggle = function(cbox, id, type, component) {
+    oldval = cbox.checked ? 0 : 1;
+    var dataS = {
+        "action" : "toggle",
+        "id": id,
+        "type": type,
+        "oldval": oldval,
+        "component": component,
+    };
+    data = $.param(dataS);
+    $.ajax({
+        type: "POST",
+        dataType: "json",
+        url: site_admin_url + "/plugins/analytics/ajax.php",
+        data: data,
+        success: function(result) {
+            try {
+                cbox.checked = result.newval == 1 ? true : false;
+                if (result.title != null) {
+                    cbox.title = result.title;
+                }
+                Shop.notify(result.statusMessage, 'success');
+            }
+            catch(err) {
+                alert(result.statusMessage);
+            }
+        },
+        error: function(err) {
+            console.log(err);
+        }
+    });
+    return false;
+};
+</script>
+{# end {templatelocation} #}

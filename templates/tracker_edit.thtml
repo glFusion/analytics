@@ -1,0 +1,38 @@
+{# begin {templatelocation} #}
+<div class="uk-grid uk-grid-width-1-2 uk-child-width-1-2">
+	<div>
+		<h2>{$LANG_UA['configuring']}: {tracker_id}</h2>
+		</h2>
+	</div>
+</div>
+<form action="{pi_admin_url}/index.php" method="post" class="uk-form uk-form-horizontal">
+	<input type="hidden" name="tracker_id" value="{tracker_id}" />
+<!-- BEGIN fieldRow -->
+	<div class="uk-form-row uk-margin">
+		<label class="uk-form-label" for="{field_name}">{param_name}:
+			<span id="hlp_{field_name}" class="tooltip_cfg tooltipstered"></span>
+		</label>
+		<div class="uk-form-controls uk-form-controls-text">
+			{param_field}
+{!if hlp_text}
+			<i style="margin-left:10px;" class="uk-icon uk-icon-question-circle tooltip" title="{hlp_text}"></i>
+{!endif}
+		</div>
+	</div>
+<!-- END fieldRow -->
+	<div class="uk-form-row uk-margin">
+		<label class="uk-form-label" for="f_enabled">{$LANG_SHOP['enabled']}:</label>
+		<div class="uk-form-controls uk-form-controls-text">
+			<input class="uk-checkbox" id="f_enabled" type="checkbox" name="enabled" value="1" {enabled_chk} />
+		</div>
+	</div>
+	<div class="uk-form-row uk-margin">
+		<div class="uk-form-controls uk-form-controls-text">
+			<button type="submit" name="saveconfig" class="uk-button uk-button-success">{$LANG_ADMIN['save']}</button>
+			<button type="reset" name="reset" class="uk-button uk-button-primary">{$LANG_ADMIN['reset']}</button>
+			<a class="uk-button" href="{pi_admin_url}/index.php?list">{$LANG_ADMIN['cancel']}</a>
+		</div>
+	</div>
+</form>
+{tooltipster_js}
+{# end {templatelocation} #}
