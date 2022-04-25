@@ -28,11 +28,13 @@ $_SQL = array(
 ) ENGINE=MyISAM",
 
 'ua_sess_info' => "CREATE TABLE {$_TABLES['ua_sess_info']} (
+  `s_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `sess_id` varchar(127) NOT NULL,
   `tracker_id` varchar(40) NOT NULL DEFAULT '',
   `uniq_id` varchar(20) NOT NULL DEFAULT '',
   `trk_info` text DEFAULT NULL,
   `last_update` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`s_id`),
   UNIQUE KEY `sess_trk` (`sess_id`,`tracker_id`),
   KEY `trk_uniq` (`tracker_id`,`uniq_id`)
 ) ENGINE=MyISAM",

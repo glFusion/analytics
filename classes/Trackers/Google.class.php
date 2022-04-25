@@ -100,20 +100,26 @@ class Google extends \Analytics\Tracker
     }
 
 
-    private function convertItemView($V) : array
+    /**
+     * Convert an ItemView object to Google's format.
+     *
+     * @param   object  $IV ItemView object
+     * @return  array       Array of data to include in Google's tag
+     */
+    private function convertItemView(ItemView $IV) : array
     {
         $retval = array(
-            'id' => $V->sku,
-            'name' => $V->short_dscp,
-            'brand' => $V->brand,
-            'category' => $V->categories,
-            'variant' => $V->variant,
-            'list_position' => $V->list_position,
-            'quantity' => $V->quantity,
-            'price' => number_format($V->price, 2),
+            'id' => $IV->sku,
+            'name' => $IV->short_dscp,
+            'brand' => $IV->brand,
+            'category' => $IV->categories,
+            'variant' => $IV->variant,
+            'list_position' => $IV->list_position,
+            'quantity' => $IV->quantity,
+            'price' => number_format($IV->price, 2),
         );
-        if (!empty($V->list_name)) {
-            $retval['list_name'] = $V->list_name;
+        if (!empty($IV->list_name)) {
+            $retval['list_name'] = $IV->list_name;
         }
         return $retval;
     }
@@ -125,7 +131,7 @@ class Google extends \Analytics\Tracker
      * @param   object  $IV     ItemView object
      * @return  object  $this
      */
-    public function addProductView(\Analytics\Models\Ecommerce\ItemView $V) : self
+    public function addProductView(ItemView $IV) : self
     {
         $items = array(
             'items' => array(
@@ -215,13 +221,13 @@ class Google extends \Analytics\Tracker
      */
     public function addTransactionViewAsync(OrderView $OV, array $trk_info, array $IPN) : self
     {
-        $sess_info = $this->getSessionByUniqId($trk_info['trk_id']);
-        if (!isset($sess_info['cid'])) {
+        $sess_info = $this->getSessionById($trk_info['s_id']);
+        if (!isset($sess_info['Google_cid'])) {
             return $this;
         }
-        $cid = $sess_info['cid'];
+        $cid = $sess_info['Google_cid'];
 
-        require_once __DIR__ . '/../../vendor/autoload.php';
+        require_once Config::get('path') . 'vendor/autoload.php';
         $client = new \GuzzleHttp\Client([
             'base_uri' => 'https://www.google-analytics.com/collect'
         ]);
@@ -272,7 +278,7 @@ class Google extends \Analytics\Tracker
     protected function makeSessionInfo() : array
     {
         return array(
-            'cid' => $this->uuid(),
+            $this->tracker_id . '_cid' => $this->uuid(),
         );
     }
 

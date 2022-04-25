@@ -167,18 +167,19 @@ class Owa extends \Analytics\Tracker
      */
     public function addTransactionViewAsync(OrderView $OV, array$trk_info, array $IPN) : self
     {
-        $sess_info = $this->getSessionByUniqId($trk_info['trk_id']);
+        $sess_info = $this->getSessionById($trk_info['s_id']);
         if (!isset($sess_info['owa_session'])) {
             return $this;
         }
         $owa_sess_id = $sess_info['owa_session'];
 
-        require_once __DIR__ . '/../../vendor/autoload.php';
+        require_once Config::get('path') . 'vendor/autoload.php';
         $config = array(
             'instance_url' => $this->getConfigItem('tracking_url'),
             'credentials' => $this->getConfigItem('api_key'),
             'auth_key' => $this->getConfigItem('secret_auth_key'),
         );
+
         $tracker = new \OwaSdk\Tracker\TrackerClient($config);
         $tracker->setSiteId($this->getConfigItem('site_id'));
         $tracker->trackPageView(); // track the page view

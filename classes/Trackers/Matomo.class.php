@@ -325,13 +325,13 @@ class Matomo extends \Analytics\Tracker
      */
     public function addTransactionViewAsync(OrderView $OV, array $trk_info, array $IPN) : self
     {
-        $sess_info = $this->getSessionByUniqId($trk_info['trk_id']);
-        if (!isset($sess_info['cid'])) {
+        $sess_info = $this->getSessionById($trk_info['s_id']);
+        if (!isset($sess_info['Matomo_cid'])) {
             return $this;
         }
-        $cid = $sess_info['cid'];
+        $cid = $sess_info['Matomo_cid'];
 
-        require_once __DIR__ . '/../../vendor/autoload.php';
+        require_once Config::get('path') . 'vendor/autoload.php';
         $tracker = new \MatomoTracker(
             $this->getConfigItem('site_id'),
             $this->getConfigItem('matomo_url')

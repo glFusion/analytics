@@ -882,6 +882,42 @@ class Tracker
     }
 
 
+    /**
+     * Get session information by record ID.
+     * Added to allow for shorter strings passed to Ecommerce gateways.
+     *
+     * @param   integer $s_id       Session record ID
+     * @return  array       Database record, empty array if not found
+     */
+    public function getSessionById(int $s_id) : array
+    {
+        global $_TABLES;
+
+        $db = Database::getInstance();
+        try {
+            $data = $db->conn->executeQuery(
+                "SELECT * FROM {$_TABLES['ua_sess_info']} WHERE s_id = ?",
+                [$s_id],
+                [Database::INTEGER]
+            )->fetch(Database::ASSOCIATIVE);
+        } catch (\Exception $e) {
+            $data = NULL;
+            Log::write('system', Log::ERROR, __METHOD__ . ': ' . $e->getMessage());
+        }
+        if (is_array($data)) {
+            return json_decode($data['trk_info'], true);
+        } else {
+            return array();
+        }
+    }
+
+
+    /**
+     * Get the session data record by the unique ID value.
+     *
+     * @param   string  $uniq_id    Unique ID string
+     * @return  array       Database record, empty array if not found
+     */
     public function getSessionByUniqId(string $uniq_id) : array
     {
         global $_TABLES;
@@ -906,6 +942,12 @@ class Tracker
     }
 
 
+    /**
+     * Gets the session information for the current visitor.
+     * Creates a new session record if none found.
+     *
+     * @return  array   Array of session data
+     */
     public function getSessionInfo() : array
     {
         global $_TABLES;
@@ -925,6 +967,7 @@ class Tracker
         }
         if (is_array($data)) {
             $this->session_info = array(
+                's_id' => $data['s_id'],
                 'sess_id' => $sess_id,
                 'uniq_id' => $data['uniq_id'],
                 'info' => json_decode($data['trk_info']),
@@ -943,6 +986,9 @@ class Tracker
                     [$sess_id, $this->tracker_id, $uniqid, json_encode($this->session_info['info'])],
                     [Database::STRING, Database::STRING, Database::STRING, Database::STRING]
                 );
+                if ($status) {
+                    $this->session_info['s_id'] = $db->conn->lastInsertId();
+                }
             } catch (\Exception $e) {
                 $status = false;
                 Log::write('system', Log::ERROR, __METHOD__ . ': ' . $e->getMessage());
@@ -962,7 +1008,7 @@ class Tracker
         $arr = \array_values(\unpack('N1a/n4b/N1c', \openssl_random_pseudo_bytes(16)));
         $arr[2] = ($arr[2] & 0x0fff) | 0x4000;
         return array(
-            'cid' => \vsprintf('%08x%04x%04x', $arr),
+            $this->tracker_id . '_cid' => \vsprintf('%08x%04x%04x', $arr),
         );
     }
 
