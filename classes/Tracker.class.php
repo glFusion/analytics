@@ -922,9 +922,10 @@ class Tracker
         $db = Database::getInstance();
         try {
             $data = $db->conn->executeQuery(
-                "SELECT * FROM {$_TABLES['ua_sess_info']} WHERE s_id = ?",
-                [$s_id],
-                [Database::INTEGER]
+                "SELECT * FROM {$_TABLES['ua_sess_info']}
+                WHERE s_id = ? AND tracker_id = ?",
+                [$s_id, $this->tracker_id],
+                [Database::INTEGER, Database::STRING]
             )->fetch(Database::ASSOCIATIVE);
         } catch (\Exception $e) {
             $data = NULL;
