@@ -2,9 +2,9 @@
 
 This plugin provides a method to implement one or more web analytics
 providers to track user activity. The following trackers are currently supported:
-- Google Analytics
-- Matomo
-- Open Web Analytics
+- Google Analytics (https;//analytics.google.com)
+- Matomo (https://matomo.org)
+- Open Web Analytics (https://www.openwebanalytics.com)
 
 Once a module is installed and configured it will automatically include the tracking
 code between the HTML "head" tags.
