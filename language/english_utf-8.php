@@ -23,11 +23,12 @@ $LANG_UA = array (
 'ck_to_enable'      => 'Click to Enable',
 'tr_inst_success'   => 'Tracker %s Installed Successfully.',
 'tr_inst_fail'      => 'Tracker %s could not be installed.',
+'q_del_item'        => 'Are you sure you want to delete this item?',
+'configuring'       => 'Configuring Tracker',
 'msg_updated'       => 'The item was updated.',
 'msg_nochange'      => 'The item was not changed.',
 'del_item'          => 'Delete this item',
-'q_del_item'        => 'Are you sure you want to delete this item?',
-'configuring'       => 'Configuring Tracker',
+'msg_err_occurred'  => 'An error occurred, check the system log.',
 );
 
 

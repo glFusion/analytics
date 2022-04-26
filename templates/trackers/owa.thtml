@@ -1,7 +1,7 @@
 <!-- Start Open Web Analytics Tracker -->
 <script type="text/javascript">
 //<![CDATA[
-var owa_baseUrl = '{tracking_url}';
+var owa_baseUrl = '{tracking_url}/';
 var owa_cmds = owa_cmds || [];
 owa_cmds.push(['setSiteId', '{site_id}']);
 owa_cmds.push(['trackPageView']);

@@ -24,6 +24,8 @@ Click the Edit icon for the installed module(s) to update the configuration item
 
 For trackers that support custom data fields you can use autotags to capture additional information.
 
+For trackers that require you to enter the tracking URL, do not add a trailing slash.
+
 ## Global Configuration
 ### Main Settings
 #### Track Admin Pages?

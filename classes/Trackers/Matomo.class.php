@@ -371,5 +371,18 @@ class Matomo extends \Analytics\Tracker
         return $this;
     }
 
+
+    /**
+     * Sanitize the configuration, if necessary.
+     * Operates directly on the object config array.
+     *
+     * @return  object  $this
+     */
+    protected function sanitizeConfig() : self
+    {
+        $this->config['matomo_url'] = self::_stripTrailingSlashes($this->config['matomo_url']);
+        return $this;
+    }
+
 }
 

@@ -69,12 +69,13 @@ case 'saveconfig':
     $tracker_id = isset($_POST['tracker_id']) ? $_POST['tracker_id'] : '';
     if (!empty($tracker_id)) {
         $Tracker = Analytics\Tracker::create($tracker_id);
-        if (!$Tracker->saveConfig($_POST)) {
-            COM_setMsg($LANG_UA['msg_nochange']);
-            echo COM_refresh(Config::get('admin_url') . '/index.php?config=' . $tracker_id);
-        } else {
-            COM_setMsg($LANG_UA['msg_updated']);
+        $status = $Tracker->saveConfig($_POST);
+        if ($status > -1) {
+            COM_setMsg($status == 0 ? $LANG_UA['msg_nochange'] : $LANG_UA['msg_updated']);
             COM_refresh(Config::get('admin_url') . '/index.php?list');
+        } else {
+            COM_setMsg($LANG_UA['msg_err_occurred'], 'error');
+            echo COM_refresh(Config::get('admin_url') . '/index.php?config=' . $tracker_id);
         }
     }
     break;

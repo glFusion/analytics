@@ -211,5 +211,18 @@ class Owa extends \Analytics\Tracker
         return $this;
     }
 
+
+    /**
+     * Sanitize the configuration, if necessary.
+     * Operates directly on the object config array.
+     *
+     * @return  object  $this
+     */
+    protected function sanitizeConfig() : self
+    {
+        $this->config['tracking_url'] = self::_stripTrailingSlashes($this->config['tracking_url']);
+        return $this;
+    }
+
 }
 

@@ -848,9 +848,9 @@ class Tracker
      * Save the config variables.
      *
      * @param   array   $A      Array of config items, e.g. $_POST
-     * @return  boolean         True if saved successfully, False if not
+     * @return  integer     1 for saved, 0 for no change, -1 for error
      */
-    public function saveConfig(?array $A = NULL) : bool
+    public function saveConfig(?array $A = NULL) : int
     {
         global $_TABLES;
 
@@ -874,6 +874,9 @@ class Tracker
             }
         }
 
+        // Allow tracker modules to sanitize the config as needed.
+        $this->sanitizeConfig();
+
         $config = @json_encode($this->config);
         if (!$config) return false;
 
@@ -889,7 +892,7 @@ class Tracker
                 [Database::STRING, Database::INTEGER, Database::STRING]
             );
         } catch (\Exception $e) {
-            $status = 0;
+            $status = -1;
             Log::write('system', Log::ERROR, __METHOD__ . ': ' . $e->getMessage());
         }
         return $status;
@@ -1053,6 +1056,30 @@ class Tracker
         $arr[2] = ($arr[2] & 0x0fff) | 0x4000;
         $arr[3] = ($arr[3] & 0x3fff) | 0x8000;
         return \vsprintf('%08x-%04x-%04x-%04x-%04x%08x', $arr);
+    }
+
+
+    /**
+     * Sanitize the configuration, if necessary.
+     * Operates directly on the object config array.
+     *
+     * @return  object  $this
+     */
+    protected function sanitizeConfig() : self
+    {
+        return $this;
+    }
+
+
+    /**
+     * Strip trailing slashes from URLs.
+     *
+     * @param   string  $url    Url to sanitize
+     * @return  string      Sanitized Url
+     */
+    protected function _stripTrailingSlashes(string $url) : string
+    {
+        return rtrim($url, '/');
     }
 
 }
