@@ -1,5 +1,5 @@
 {# begin {templatelocation} #}
-<script src="{site_url}/analytics/js/util.js"> />
+<script src="{site_url}/analytics/js/util.js"></script>
 <div class="uk-grid" uk-grid>
 	<div class="uk-width-3-4">
 {!if icon}
