@@ -109,10 +109,9 @@ class Owa extends \Analytics\Tracker
                 $T->parse('customVar', 'customVars', true);
             }
         }
-
         $T->parse('output', 'tracker');
         $retval = $T->finish($T->get_var('output'));
-        if (!empty($customs)) {
+        if (!empty($customs) && Config::get('parse_autotags')) {
             $retval = PLG_replaceTags($retval);
         }
         $this->clearCodes();

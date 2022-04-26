@@ -35,3 +35,5 @@ The default is to omit admin pages from tracking.
 #### Parse Autotags?
 If you use autotags in the custom fields, select "True" to enable autotag parsing.
 Otherwise setting this to "False" will improve performance.
+
+Be advised that the render autotag value will be visible in the page source code.
