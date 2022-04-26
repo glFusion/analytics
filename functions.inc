@@ -278,6 +278,8 @@ function plugin_autouninstall_analytics()
             'ua_trackers',
             'ua_sess_info',
         ),
+        'features' => array('analytics.admin'),
     );
+    return $out;
 }
             
