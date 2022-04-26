@@ -17,7 +17,7 @@ require_once __DIR__  . '/functions.inc';
 /** Include database queries */
 require_once __DIR__ . '/sql/mysql_install.php';
 /** Include default values */
-//require_once __DIR__ . '/install_defaults.php';
+require_once __DIR__ . '/install_defaults.php';
 
 use Analytics\Config;
 global $_CONF;
