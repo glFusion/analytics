@@ -70,10 +70,9 @@ $analyticsConfigData = array(
 /**
  * Initialize Analytics plugin configuration.
  *
- * @param   integer $admin_group    Admin Group ID created by installation
  * @return  boolean     True: success; False: an error occurred
  */
-function plugin_initconfig_analytics($admin_group)
+function plugin_initconfig_analytics()
 {
     global $analyticsConfigData;
 
