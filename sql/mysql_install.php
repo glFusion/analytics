@@ -23,7 +23,7 @@ $_SQL = array(
   `tracker_id` varchar(40) NOT NULL DEFAULT '',
   `enabled` tinyint(1) unsigned NOT NULL DEFAULT 0,
   `base_code` text NOT NULL DEFAULT '',
-  `config` text NOT NULL DEFAULT '[]',
+  `config` text,
   UNIQUE KEY `tracker_id` (`tracker_id`)
 ) ENGINE=MyISAM",
 
@@ -32,7 +32,7 @@ $_SQL = array(
   `sess_id` varchar(127) NOT NULL,
   `tracker_id` varchar(40) NOT NULL DEFAULT '',
   `uniq_id` varchar(20) NOT NULL DEFAULT '',
-  `trk_info` text DEFAULT NULL,
+  `trk_info` text,
   `last_update` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`s_id`),
   UNIQUE KEY `sess_trk` (`sess_id`,`tracker_id`),

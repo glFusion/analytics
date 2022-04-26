@@ -180,8 +180,8 @@ class Tracker
         $this->enabled = isset($A['enabled']) && $A['enabled'] ? 1 : 0;
         $this->base_code = $A['base_code'];
         $this->installed = isset($A['installed']) && $A['installed'] ? 1 : 0;
-        $config = json_decode($A['config'], true);
-        if ($config !== false) {
+        $config = @json_decode($A['config'], true);
+        if (is_array($config)) {
             // Merge into config property, preserving any defaults not yet in the DB.
             foreach ($config as $key=>$val) {
                 if (array_key_exists($key, $this->cfgFields)) {
@@ -194,6 +194,8 @@ class Tracker
                     $this->config[$key] = $val;
                 }
             }
+        } else {
+            $this->config = array();
         }
         return $this;
     }
