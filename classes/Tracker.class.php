@@ -581,7 +581,7 @@ class Tracker
                 'id' => "togenabled{$A['tracker_id']}",
                 'checked' => $fieldvalue == 1,
                 'title' => $tip,
-                'onclick' => "UA_toggle(this,'{$A['tracker_id']}','{$fieldname}','tracker');",
+                'onclick' => "Analytics.toggle(this,'{$A['tracker_id']}','{$fieldname}','tracker');",
             ) );
             break;
 
@@ -901,7 +901,7 @@ class Tracker
         $result = curl_exec($ch);
         $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         if ($code != 200) {
-            SHOP_log("Error sending tracking code: code $code", SHOP_LOG_ERROR);
+            Log::write('system', Log::ERROR, __FUNCTION__ . ": Error sending tracking code: code $code");
             return false;
         }
         return true;

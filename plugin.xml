@@ -1,6 +1,6 @@
 <plugin>
     <id>analytics</id>
-    <name>Shop</name>
+    <name>Analytics</name>
 	<description>Provides a method to add web analytics codes.</description>
     <version>0.0.2</version>
     <glfusionversion>2.0.0</glfusionversion>

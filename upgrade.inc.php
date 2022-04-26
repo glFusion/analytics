@@ -173,7 +173,7 @@ function UA_remove_old_files()
 /**
  * Check if a column exists in a table
  *
- * @param   string  $table      Table Key, defined in shop.php
+ * @param   string  $table      Table Key, defined in analytics.php
  * @param   string  $col_name   Column name to check
  * @return  boolean     True if the column exists, False if not
  */
