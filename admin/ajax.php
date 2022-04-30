@@ -14,11 +14,12 @@
 
 /** Include required glFusion common functions */
 require_once '../../../lib-common.php';
+use glFusion\Log\Log;
 
 // This is for administrators only.  It's called by Javascript,
 // so don't try to display a message
 if (!plugin_ismoderator_analytics()) {
-    COM_accessLog("User {$_USER['username']} tried to illegally access the analytics admin ajax function.");
+    Log::write('system', Log::ERROR, "User {$_USER['username']} tried to illegally access the analytics admin ajax function.");
     $retval = array(
         'status' => false,
         'statusMessage' => $LANG_UA['access_denied'],
@@ -31,6 +32,7 @@ if (!plugin_ismoderator_analytics()) {
     exit;
 }
 
+Log::write('system', Log::DEBUG, "Analytics ajax POST: " . var_export($_POST, true));
 if (isset($_POST['action'])) {
     $action = $_POST['action'];
 } elseif (isset($_GET['action'])) {
@@ -38,7 +40,6 @@ if (isset($_POST['action'])) {
 } else {
     $action = '';
 }
-COM_errorLog(var_export($_POST,true));
 
 $title = NULL;      // title attribute to be set
 switch ($action) {

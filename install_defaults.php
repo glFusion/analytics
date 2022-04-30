@@ -16,6 +16,7 @@
 if (!defined('GVERSION')) {
     die('This file can not be used on its own!');
 }
+use glFusion\Log\Log;
 
 /** @var global config data */
 global $analyticsConfigData;
@@ -83,7 +84,7 @@ function plugin_initconfig_analytics()
             _addConfigItem($cfgItem);
         }
     } else {
-        COM_errorLog('initconfig error: Analytics config group already exists');
+        Log::write('system', Log::ERROR, __FUNCTION__ . ': Analytics config group already exists');
     }
     return true;
 }

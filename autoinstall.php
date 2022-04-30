@@ -18,8 +18,9 @@ require_once __DIR__  . '/functions.inc';
 require_once __DIR__ . '/sql/mysql_install.php';
 /** Include default values */
 require_once __DIR__ . '/install_defaults.php';
-
+use glFusion\Log\Log;
 use Analytics\Config;
+
 global $_CONF;
 $language = $_CONF['language'];
 if (!is_file(__DIR__  . '/language/' . $language . '.php')) {
@@ -81,7 +82,7 @@ function plugin_install_analytics()
     $pi_name            = Config::PI_NAME;
     $pi_display_name    = Config::get('pi_display_name');
 
-    COM_errorLog("Attempting to install the $pi_display_name plugin", 1);
+    Log::write('system', Log::INFO, "Attempting to install the $pi_display_name plugin");
 
     $ret = INSTALLER_install($INSTALL_plugin[$pi_name]);
     if ($ret > 0) {

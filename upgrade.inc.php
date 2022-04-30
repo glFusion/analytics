@@ -125,14 +125,17 @@ function analytics_do_upgrade_sql($version, $dvlp=false)
         return true;
     }
 
+    $db = Database::getInstance();
+
     // Execute SQL now to perform the upgrade
-    COM_errorLOG("--Updating Analytics to version $version");
+    Log::write('system', Log::INFO, "--Updating Analytics to version $version");
     foreach($UA_UPGRADE[$version] as $sql) {
-        COM_errorLOG("Analytics Plugin $version update: Executing SQL => $sql");
-        DB_query($sql, '1');
-        if (DB_error()) {
-            COM_errorLog("SQL Error during Analytics Plugin update",1);
-            if (!$dvlp) return false;
+        Log::write('system', Log::INFO, "Analytics Plugin $version update: Executing SQL => $sql");
+        try {
+            $db->conn->executeUpdate($sql);
+        } catch (\Exception $e) {
+            Log::write('system', Log::ERROR, __FUNCTION__ . ": $sql");
+            //if (!$dvlp) return false;
         }
     }
     return true;
@@ -182,7 +185,14 @@ function UA_tableHasColumn(string $table, string $col_name) : bool
     global $_TABLES;
 
     $col_name = DB_escapeString($col_name);
-    $res = DB_query("SHOW COLUMNS FROM {$_TABLES[$table]} LIKE '$col_name'");
-    return DB_numRows($res) == 0 ? false : true;
+    $db = Database::getInstance();
+    try {
+        $data = $db->conn->executeQuery(
+            "SHOW COLUMNS FROM {$_TABLES[$table]} LIKE '$col_name'"
+        )->fetchAssociative();
+    } catch (\Exception $e) {
+        $data = NULL;
+    }
+    return !empty($data);
 }
 
