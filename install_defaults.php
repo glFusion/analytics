@@ -56,7 +56,7 @@ $analyticsConfigData = array(
     ),
     array(
         'name' => 'parse_autotags', // Parse autotags in custom fields?
-        'default_value' => 1,
+        'default_value' => 0,
         'type' => 'select',
         'subgroup' => 0,
         'fieldset' => 0,
