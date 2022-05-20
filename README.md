@@ -28,9 +28,13 @@ For trackers that require you to enter the tracking URL, do not add a trailing s
 
 ## Global Configuration
 ### Main Settings
+#### Track Admin Actions?
+Select `Yes` to have hits made by administrators tracked.
+
 #### Track Admin Pages?
 Select "True" to have hits to administrative pages (under the "/admin/" url prefix) tracked.
-The default is to omit admin pages from tracking.
+The default is to omit admin pages from tracking. If `Track Admin Actions` is `No` then this
+setting has no effect.
 
 #### Parse Autotags?
 If you use autotags in the custom fields, select "True" to enable autotag parsing.

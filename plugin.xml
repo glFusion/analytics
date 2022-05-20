@@ -2,7 +2,7 @@
     <id>analytics</id>
     <name>Analytics</name>
 	<description>Provides a method to add web analytics codes.</description>
-    <version>0.1.0</version>
+    <version>0.1.1</version>
     <glfusionversion>2.0.0</glfusionversion>
     <phpversion>7.4.0</phpversion>
     <url>http://www.glfusion.org</url>
