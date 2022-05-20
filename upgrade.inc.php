@@ -78,7 +78,7 @@ function analytics_do_update_version($version)
 
     $db = Database::getInstance();
     try {
-        $db->conn->executeUpdate(
+        $db->conn->executeStatement(
             "UPDATE {$_TABLES['plugins']} SET
             pi_version = ?,
             pi_gl_version = ?,
@@ -132,10 +132,9 @@ function analytics_do_upgrade_sql($version, $dvlp=false)
     foreach($UA_UPGRADE[$version] as $sql) {
         Log::write('system', Log::INFO, "Analytics Plugin $version update: Executing SQL => $sql");
         try {
-            $db->conn->executeUpdate($sql);
+            $db->conn->executeStatement($sql);
         } catch (\Exception $e) {
             Log::write('system', Log::ERROR, __FUNCTION__ . ": $sql");
-            //if (!$dvlp) return false;
         }
     }
     return true;
