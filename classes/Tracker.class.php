@@ -481,6 +481,8 @@ class Tracker
         global $_CONF, $_TABLES, $LANG_UA, $_USER, $LANG_ADMIN,
             $LANG32;
 
+        USES_lib_admin();
+
         $data_arr = array();
         self::getInstalled($data_arr);
         self::getUninstalled($data_arr);
@@ -623,7 +625,7 @@ class Tracker
         if (!array_key_exists($this->tracker_id, $installed)) {
             $db = Database::getInstance();
             try {
-                $status = $db->conn->executeUpdate(
+                $status = $db->conn->executeStatement(
                     "INSERT INTO {$_TABLES['ua_trackers']} SET tracker_id = ?",
                     [$this->tracker_id],
                     [Database::STRING]
@@ -632,6 +634,40 @@ class Tracker
                 Log::write('system', Log::ERROR, __METHOD__ . ': ' . $e->getMessage());
                 $status = 0;
             }
+        } else {
+            $status = true;
+        }
+        return $status ? true : false;
+    }
+
+
+    /**
+     * Install a new tracker into the table.
+     *
+     * @return  boolean     True on success, False on failure
+     */
+    public function uninstall()
+    {
+        global $_TABLES;
+
+        // Only install the gateway if it isn't already installed
+        $installed = array();
+        self::getInstalled($installed);
+        if (array_key_exists($this->tracker_id, $installed)) {
+            $db = Database::getInstance();
+            try {
+                $db->conn->delete(
+                    $_TABLES['ua_trackers'],
+                    ['tracker_id' => $this->tracker_id],
+                    [Database::STRING]
+                );
+                $status = true;
+            } catch (\Exception $e) {
+                Log::write('system', Log::ERROR, __METHOD__ . ': ' . $e->getMessage());
+                $status = 0;
+            }
+        } else {
+            $status = true;
         }
         return $status ? true : false;
     }
@@ -655,7 +691,7 @@ class Tracker
 
         $db = Database::getInstance();
         try {
-            $status = $db->conn->executeUpdate(
+            $status = $db->conn->executeStatement(
                 "UPDATE {$_TABLES['ua_trackers']}
                 SET enabled = ?
                 WHERE tracker_id = ?",
@@ -886,7 +922,7 @@ class Tracker
             enabled = ?
             WHERE tracker_id = ?";
         try {
-            $status = $db->conn->executeUpdate(
+            $status = $db->conn->executeStatement(
                 $sql,
                 [$config, $this->enabled, $this->tracker_id],
                 [Database::STRING, Database::INTEGER, Database::STRING]
@@ -1012,7 +1048,7 @@ class Tracker
                 'info' => $this->makeSessionInfo(),
             );
             try {
-                $status = $db->conn->executeUpdate(
+                $status = $db->conn->executeStatement(
                     "INSERT INTO {$_TABLES['ua_sess_info']} SET
                     sess_id = ?, tracker_id = ?, uniq_id = ?, trk_info = ?",
                     [$sess_id, $this->tracker_id, $uniqid, json_encode($this->session_info['info'])],

@@ -29,6 +29,8 @@ $LANG_UA = array (
 'msg_nochange'      => 'The item was not changed.',
 'del_item'          => 'Delete this item',
 'msg_err_occurred'  => 'An error occurred, check the system log.',
+'tracker_installed' => 'The tracker was successfully installed.',
+'tracker_removed'   => 'The tracker was successfully removed.',
 );
 
 

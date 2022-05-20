@@ -15,7 +15,8 @@
 require_once('../../../lib-common.php');
 require_once('../../auth.inc.php');
 use Analytics\Config;
-USES_lib_admin();
+use Analytics\Tracker;
+use Analytics\Menu;
 
 $content = '';
 $action = '';
@@ -41,29 +42,28 @@ $view = 'list';     // Default if no correct view specified
 
 switch ($action) {
 case 'installtracker':
-    $Tracker = Analytics\Tracker::create($actionval);
+    $Tracker = Tracker::create($actionval);
     if ($Tracker !== NULL) {
         if ($Tracker->Install()) {
-            COM_setMsg("Gateway \"$actionval\" installed successfully");
+            COM_setMsg($LANG_UA['tracker_installed']);
         } else {
-            COM_setMsg("Failed to install the \"$actionval\" gateway");
+            COM_setMsg($LANG_UA['msg_err_occurred']);
         }
     }
     echo COM_refresh(Config::get('admin_url') . '/index.php');
     break;
 
 case 'uninstall':
-    $Tracker = Analytics\Tracker::create($actionval);
+    $Tracker = Tracker::create($actionval);
     if ($Tracker !== NULL && $Tracker->isInstalled()) {
-        if ($Tracker->Install()) {
-            COM_setMsg("Gateway \"$actionval\" installed successfully");
+        if ($Tracker->uninstall()) {
+            COM_setMsg($LANG_UA['tracker_removed']);
         } else {
-            COM_setMsg("Failed to install the \"$actionval\" gateway");
+            COM_setMsg($LANG_UA['msg_err_occurred']);
         }
     }
     echo COM_refresh(Config::get('admin_url') . '/index.php');
     break;
-
 
 case 'saveconfig':
     $tracker_id = isset($_POST['tracker_id']) ? $_POST['tracker_id'] : '';
@@ -72,7 +72,7 @@ case 'saveconfig':
         $status = $Tracker->saveConfig($_POST);
         if ($status > -1) {
             COM_setMsg($status == 0 ? $LANG_UA['msg_nochange'] : $LANG_UA['msg_updated']);
-            COM_refresh(Config::get('admin_url') . '/index.php?list');
+            echo COM_refresh(Config::get('admin_url') . '/index.php?list');
         } else {
             COM_setMsg($LANG_UA['msg_err_occurred'], 'error');
             echo COM_refresh(Config::get('admin_url') . '/index.php?config=' . $tracker_id);
@@ -100,7 +100,7 @@ default:
 }
 
 $display = COM_siteHeader();
-$display .= \Analytics\Menu::Admin($view);
+$display .= Menu::Admin($view);
 $display .= $content;
 $display .= COM_siteFooter();
 echo $display;
