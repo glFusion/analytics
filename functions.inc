@@ -190,9 +190,10 @@ function plugin_getheadercode_analytics()
 {
     global $_CONF;
 
-
     $retval = '';
-    if (
+    if (Config::get('trk_admins') == 0 && plugin_ismoderator_analytics()) {
+        return $retval;
+    } elseif(
         Config::get('trk_adm_pages') == 1 ||
         @strpos(COM_getCurrentURL(), $_CONF['site_admin_url']) !== 0
     ) {

@@ -47,6 +47,7 @@ $LANG_fs['analytics'] = array(
 );
 
 $LANG_confignames['analytics'] = array(
+    'trk_admins' => 'Track Admin Actions?',
     'trk_adm_pages' => 'Track Admin Page Hits?',
     'parse_autotags' => 'Parse Autotags?',
 );
