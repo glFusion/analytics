@@ -52,8 +52,9 @@ $LANG_confignames['analytics'] = array(
     'trk_admins' => 'Track Admin Actions?',
     'trk_adm_pages' => 'Track Admin Page Hits?',
     'parse_autotags' => 'Parse Autotags?',
+    'block_ips' => 'Disable tracking by IP',
 );
 
 $LANG_configSelect['analytics'] = array(
-    0 => array(1 => 'True', 0 => 'False'),
+    0 => array(1 => 'Yes', 0 => 'No'),
 );

@@ -191,17 +191,23 @@ function plugin_getheadercode_analytics()
     global $_CONF;
 
     $retval = '';
+
+    if (
+        isset($_SERVER['REAL_ADDR']) &&
+        in_array($_SERVER['REAL_ADDR'], Config::get('block_ips'))
+    ) {
+        return $retval;
+    }
+
     if (Config::get('trk_admins') == 0 && plugin_ismoderator_analytics()) {
         return $retval;
     } elseif(
         Config::get('trk_adm_pages') == 1 ||
         @strpos(COM_getCurrentURL(), $_CONF['site_admin_url']) !== 0
     ) {
-        $Trackers = Analytics\Tracker::getEnabled();
-        foreach ($Trackers as $Tracker) {
-            $Instance = Analytics\Tracker::getInstance($Tracker->getName());
-            $retval .= $Instance->getCode();
-            $Instance->clearCodes();
+        foreach (Analytics\Tracker::getEnabled() as $Tracker) {
+            $retval .= $Tracker->getCode();
+            $Tracker->clearCodes();
         }
     }
     return $retval;

@@ -5,6 +5,7 @@ providers to track user activity. The following trackers are currently supported
 - Google Analytics (https://analytics.google.com)
 - Matomo (https://matomo.org)
 - Open Web Analytics (https://www.openwebanalytics.com)
+- Smartlook (https://smartlook.com)
 
 Once a module is installed and configured it will automatically include the tracking
 code between the HTML "head" tags.
@@ -41,3 +42,8 @@ If you use autotags in the custom fields, select "True" to enable autotag parsin
 The default for this setting is "False" to improve performance.
 
 Keep in mind that the rendered autotag value will be visible in the page source code.
+
+#### IP Addresses to Block
+To prevent tracking your internal usage and skewing statistics, enter one or more
+IP addresses which will not include the tracking codes.
+

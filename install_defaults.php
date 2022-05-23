@@ -76,6 +76,17 @@ $analyticsConfigData = array(
         'set' => true,
         'group' => 'analytics',
     ),
+    array(
+        'name' => 'block_ips',      // IP addresses to block
+        'default_value' => array(),
+        'type' => '%text',
+        'subgroup' => 0,
+        'fieldset' => 00,
+        'selection_array' => 0,
+        'sort' => 40,
+        'set' => true,
+        'group' => 'analytics',
+    ),
 );
 
 
