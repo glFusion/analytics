@@ -5,14 +5,13 @@
  * @author      Lee Garner <lee@leegarner.com>
  * @copyright   Copyright (c) 2022 Lee Garner <lee@leegarner.com>
  * @package     analytics
- * @version     v0.0.1
+ * @version     v0.1.1
  * @since       v0.0.1
  * @license     http://opensource.org/licenses/gpl-2.0.php
  *              GNU Public License v2 or later
  * @filesource
  */
 namespace Analytics;
-use Analytics\Template;
 
 
 /**
@@ -28,9 +27,13 @@ class Menu
      * @param   string  $view   View being shown, so set the help text
      * @return  string      Administrator menu
      */
-    public static function Admin($view='')
+    public static function Admin(?string $view=NULL) : string
     {
         global $_CONF, $LANG_ADMIN, $LANG_UA;
+
+        if (empty($view)) {
+            $view = 'trackers';
+        }
 
         USES_lib_admin();
         if (isset($LANG_UA['admin_hdr_' . $view]) &&
