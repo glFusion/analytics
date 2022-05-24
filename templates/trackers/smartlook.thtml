@@ -1,3 +1,4 @@
+{# begin {templatelocation} #}
 <!-- Begin Smartlook tracking code -->
 <script>
   window.smartlook||(function(d) {
@@ -9,3 +10,4 @@
     {code_txt}
 </script>
 <!-- End Smartlook tracking code -->
+{# end {templatelocation} #}

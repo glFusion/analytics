@@ -1,3 +1,4 @@
+{# begin {templatelocation} #}
 <!-- Start Open Web Analytics Tracker -->
 <script type="text/javascript">
 //<![CDATA[
@@ -19,3 +20,4 @@ owa_cmds.push(['trackClicks']);
 //]]>
 </script>
 <!-- End Open Web Analytics Code -->
+{# end {templatelocation} #}
