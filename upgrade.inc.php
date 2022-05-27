@@ -183,8 +183,8 @@ function UA_tableHasColumn(string $table, string $col_name) : bool
 {
     global $_TABLES;
 
-    $col_name = DB_escapeString($col_name);
     $db = Database::getInstance();
+    $col_name = $db->conn->quoteIdentifier($col_name);
     try {
         $data = $db->conn->executeQuery(
             "SHOW COLUMNS FROM {$_TABLES[$table]} LIKE '$col_name'"
