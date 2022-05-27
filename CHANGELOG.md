@@ -4,3 +4,4 @@
 Release TBD
   * Add Smartlook tracker (https://smartlook.com).
   * Allow disabling all tracking for administrators.
+  * Allow disabling all tracking for IP addresses.
