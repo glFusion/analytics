@@ -6,6 +6,7 @@ providers to track user activity. The following trackers are currently supported
 - Matomo (https://matomo.org)
 - Open Web Analytics (https://www.openwebanalytics.com)
 - Smartlook (https://smartlook.com)
+- StatCounter (https://statcounter.com). Only the invisible counter is supported.
 
 Once a module is installed and configured it will automatically include the tracking
 code between the HTML "head" tags.
