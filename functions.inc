@@ -44,6 +44,7 @@ spl_autoload_register(function ($class)
         require $file;
     }
 });
+use glFusion\Database\Database;
 use Analytics\Config;
 Config::getInstance();
 
@@ -89,8 +90,27 @@ function plugin_upgrade_analytics($dvlp = false)
  */
 function plugin_runScheduledTask_analytics()
 {
-    $ts = time() - (86400 * 14);
+    global $_CONF, $_TABLES, $_VARS;
+
+    $today = $_CONF['_now']->format('Ymd', true);
+    $lastrun = isset($_VARS['ua_lastdaily']) ? $_VARS['ua_lastdaily'] : '';
+    if ($lastrun == $today) {
+        return;     // already ran today
+    }
+
     $db = Database::getInstance();
+    try {
+        $db->conn->executeUpdate(
+            "INSERT INTO {$_TABLES['vars']} VALUES('ua_lastdaily', ?)
+            ON DUPLICATE KEY UPDATE value = ?",
+            array($today, $today),
+            array(Database::STRING, Database::STRING)
+        );
+    } catch (\Exception $e) {
+        Logger::System(__FUNCTION__ . ': ' . $e->getMessage());
+    }
+
+    $ts = time() - (86400 * 14);
     try {
         $db->conn->executeUpdate(
             "DELETE FROM {$_TABLES['ua_sess_info']}
