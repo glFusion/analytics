@@ -49,6 +49,7 @@ case 'toggle':
         switch ($_POST['type']) {
         case 'enabled':
             $newval = \Analytics\Tracker::toggleEnabled($_POST['oldval'], $_POST['id']);
+            $title = $newval ? $LANG_UA['ck_to_disable'] : $LANG_UA['ck_to_enable'];
             break;
          default:
             exit;
