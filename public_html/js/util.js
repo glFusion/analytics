@@ -16,50 +16,50 @@ var Analytics = (function() {
 			}
 			if (typeof UIkit.notify === 'function') {
 				// uikit v2 theme
-	            UIkit.notify(icon + message, {timeout: timeout});
+				UIkit.notify(icon + message, {timeout: timeout});
 			} else if (typeof UIkit.notification === 'function') {
-		        // uikit v3 theme
+				// uikit v3 theme
 				UIkit.notification({
-		            message: icon + message,
-				    timeout: timeout,
-		            status: status,
+					message: icon + message,
+					timeout: timeout,
+					status: status,
 				});
-		    } else {
+			} else {
 				alert(message);
 			}
 		},
 		toggle: function(cbox, id, type, component) {
 			oldval = cbox.checked ? 0 : 1;
-		    var dataS = {
+			var dataS = {
 				"action" : "toggle",
-		        "id": id,
+				"id": id,
 				"type": type,
-		        "oldval": oldval,
+				"oldval": oldval,
 				"component": component,
-		    };
-		    data = $.param(dataS);
-		    $.ajax({
+			};
+			data = $.param(dataS);
+			$.ajax({
 				type: "POST",
-		        dataType: "json",
+				dataType: "json",
 				url: site_admin_url + "/plugins/analytics/ajax.php",
-		        data: data,
+				data: data,
 				success: function(result) {
-		            try {
-				        cbox.checked = result.newval == 1 ? true : false;
+					try {
+						cbox.checked = result.newval == 1 ? true : false;
 						if (result.title != null) {
-		                    cbox.title = result.title;
-				        }
+							cbox.title = result.title;
+						}
 						Analytics.notify(result.statusMessage, 'success');
-		            }
-				    catch(err) {
+					}
+					catch(err) {
 						alert(result.statusMessage);
-		            }
+					}
 				},
-		        error: function(err) {
-				    console.log(err);
-		        }
+				error: function(err) {
+					console.log(err);
+				}
 			});
 		}
-    }
+	}
 })();
 
