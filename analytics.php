@@ -23,8 +23,6 @@ global $_DB_table_prefix, $_TABLES;
 Analytics\Config::set('pi_version', '0.1.0.3');
 Analytics\Config::set('gl_version', '2.0.0');
 
-$_UA_table_prefix = $_DB_table_prefix . 'ua_';
-
-$_TABLES['ua_trackers'] = $_UA_table_prefix . 'trackers';
-$_TABLES['ua_sess_info'] = $_UA_table_prefix . 'sess_info';
+$_TABLES['ua_trackers'] = $_DB_table_prefix . 'ua_trackers';
+$_TABLES['ua_sess_info'] = $_DB_table_prefix . 'ua_sess_info';
 
