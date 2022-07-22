@@ -77,7 +77,7 @@ $analyticsConfigData = array(
         'group' => 'analytics',
     ),
     array(
-        'name' => 'block_ips',      // IP addresses to block
+        'name' => 'block_ips',      // IP addresses to ignore
         'default_value' => array(),
         'type' => '%text',
         'subgroup' => 0,

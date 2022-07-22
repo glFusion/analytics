@@ -50,9 +50,9 @@ $LANG_fs['analytics'] = array(
 
 $LANG_confignames['analytics'] = array(
     'trk_admins' => 'Track Admin Actions?',
-    'trk_adm_pages' => 'Track Admin Page Hits?',
+    'trk_adm_pages' => 'Track Hits to Admin Pages?',
     'parse_autotags' => 'Parse Autotags?',
-    'block_ips' => 'Disable tracking by IP',
+    'block_ips' => 'Ignore IP Addresses',
 );
 
 $LANG_configSelect['analytics'] = array(
