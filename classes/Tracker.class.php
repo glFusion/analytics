@@ -571,7 +571,6 @@ class Tracker
                     'url' => Config::get('admin_url') . '/index.php?installtracker=' . urlencode($A['tracker_id']),
                     'attr' => array(
                         'title' => $LANG_UA['ck_to_install'],
-                        'data-uk-tooltip' => '',
                     )
                 ) );
             } elseif ($fieldvalue == '1') {
@@ -586,7 +585,6 @@ class Tracker
                 'id' => "togenabled{$A['tracker_id']}",
                 'checked' => $fieldvalue == 1,
                 'title' => $tip,
-                'data-uk-tooltip' => '',
                 'onclick' => "Analytics.toggle(this,'{$A['tracker_id']}','{$fieldname}','tracker');",
             ) );
             break;
