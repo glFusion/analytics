@@ -89,14 +89,12 @@ class sdk {
 	
 	static function debug( $msg ) {
 		
-		if ( $this->getSetting( 'debug' ) ) {
 		if ( is_object( $msg ) || is_array( $msg ) ) {
 			
 			$msg = print_r( $msg, true );
 		}
 		
         error_log( $msg . "\n", 3, "./errors.log" );
-        }
 	}
 
 }
