@@ -3,9 +3,10 @@
  * Tracker module for Open Web Analytics (https://www.openwebanalytics.com/).
  *
  * @author      Lee Garner <lee@leegarner.com>
- * @copyright   Copyright (c) 2022 Lee Garner
+ * @copyright   Copyright (c) 2022-2023 Lee Garner
  * @package     analytics
- * @version     v0.0.1
+ * @version     v0.1.1
+ * @since       v0.0.1
  * @license     http://opensource.org/licenses/gpl-2.0.php
  *              GNU Public License v2 or later
  * @filesource
@@ -224,4 +225,3 @@ class Owa extends \Analytics\Tracker
     }
 
 }
-

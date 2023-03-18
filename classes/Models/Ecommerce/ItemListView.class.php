@@ -3,7 +3,7 @@
  * Model for the item list view in web analytics.
  *
  * @author      Lee Garner <lee@leegarner.com>
- * @copyright   Copyright (c) 2022 Lee Garner <lee@leegarner.com>
+ * @copyright   Copyright (c) 2022-2023 Lee Garner <lee@leegarner.com>
  * @package     analytics
  * @version     v0.0.1
  * @since       v0.0.1
@@ -58,4 +58,3 @@ class ItemListView
     }
 
 }
-

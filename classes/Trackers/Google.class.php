@@ -3,9 +3,10 @@
  * Tracker module for Google analytics (https://analytics.google.com).
  *
  * @author      Lee Garner <lee@leegarner.com>
- * @copyright   Copyright (c) 2022 Lee Garner
+ * @copyright   Copyright (c) 2022-2023 Lee Garner
  * @package     analytics
- * @version     v0.0.1
+ * @version     v0.1.1
+ * @since       v0.0.1
  * @license     http://opensource.org/licenses/gpl-2.0.php
  *              GNU Public License v2 or later
  * @filesource
@@ -174,7 +175,7 @@ class Google extends \Analytics\Tracker
                 'quantity': {$Item->getQuantity()},
                 'price': {$price}
         ]);");
-        
+
         /// Records the cart for this visit
         //$this->addCode("_paq.push(['trackEcommerceCartUpdate', $price]);");
         return $this;

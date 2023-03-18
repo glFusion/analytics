@@ -93,10 +93,10 @@ class Tracker
      * This function ignores the `installed` state and simply creates an object
      * from the class file, if present.
      *
-     * @param   string  $gw_name    Gateway name
+     * @param   string  $tracker_id     Tracker ID (name)
      * @return  object      Gateway object
      */
-    public static function create($tracker_id)
+    public static function create(string $tracker_id) : ?self
     {
         global $_TABLES;
 
@@ -105,8 +105,8 @@ class Tracker
         try {
             $Tracker = new $cls;
          } catch (\Exception $e) {
-            $Tracker = NULL;
             Log::write('system', Log::ERROR, __METHOD__ . ': ' . $e->getMessage());
+            return NULL;
         }
 
         $db = Database::getInstance();
@@ -136,7 +136,7 @@ class Tracker
      * @param   string  $gw_name    Gateway name
      * @return  object      Gateway object
      */
-    public static function createFromArray(array $A) : self
+    public static function createFromArray(array $A) : ?self
     {
         if (isset($A['tracker_id'])) {
             $cls = __NAMESPACE__ . "\\Trackers\\" . ucfirst($A['tracker_id']);
@@ -1119,4 +1119,3 @@ class Tracker
     }
 
 }
-

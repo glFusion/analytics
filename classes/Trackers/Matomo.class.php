@@ -3,9 +3,10 @@
  * Tracker module for Matomo analytics (https://matomo.org).
  *
  * @author      Lee Garner <lee@leegarner.com>
- * @copyright   Copyright (c) 2022 Lee Garner
+ * @copyright   Copyright (c) 2022-2023 Lee Garner
  * @package     analytics
- * @version     v0.0.1
+ * @version     v0.1.1
+ * @since       v0.0.1
  * @license     http://opensource.org/licenses/gpl-2.0.php
  *              GNU Public License v2 or later
  * @filesource
@@ -336,7 +337,7 @@ class Matomo extends \Analytics\Tracker
             $this->getConfigItem('site_id'),
             $this->getConfigItem('matomo_url')
         );
-        $auth_token = $this->getConfigItem('api_auth_token'); 
+        $auth_token = $this->getConfigItem('api_auth_token');
         $tracker->setTokenAuth($auth_token);
         $tracker->setVisitorId($cid);
         foreach ($OV->items as $IV) {
@@ -385,4 +386,3 @@ class Matomo extends \Analytics\Tracker
     }
 
 }
-

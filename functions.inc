@@ -309,4 +309,3 @@ function plugin_autouninstall_analytics()
     );
     return $out;
 }
-

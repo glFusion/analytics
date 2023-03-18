@@ -1,11 +1,12 @@
 <?php
 /**
- * Tracker module for Statcounter (https://statcounter.com)
+ * Tracker module for Statcounter (https://statcounter.com).
  *
  * @author      Lee Garner <lee@leegarner.com>
  * @copyright   Copyright (c) 2022 Lee Garner
  * @package     analytics
  * @version     v0.1.1
+ * @since       v0.1.1
  * @license     http://opensource.org/licenses/gpl-2.0.php
  *              GNU Public License v2 or later
  * @filesource
@@ -63,4 +64,3 @@ class Statcounter extends \Analytics\Tracker
     }
 
 }
-
